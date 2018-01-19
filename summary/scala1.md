@@ -50,11 +50,13 @@
   str: String = Scala is fun
   ~~~~~
   와 같이 사용이 가능하며 인자가 없어 위와 같이 괄호 없이 사용이 가능하다.
-
-  Python 및 Java8에서 처럼 lamba 형식을 Scala는 제공한다.
+# Lamda 함수
+  Python 및 Java8에서 처럼 lamda 형식을 Scala는 제공한다.
   
-  Scala 에서의 lamba는 아래와 같이 변수 => operation 으로 선언을 한다. 
+  Scala 에서의 lamda는 아래와 같이 변수 => operation 으로 선언을 한다. 
   ~~~~~~~
   scala> (x: Int) => x+x
   res5: Int => Int = $$Lambda$4290/641083727@ea23797
   ~~~~~~~
+  
+ 
