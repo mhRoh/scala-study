@@ -11,7 +11,7 @@
   
 - val 의 경우는 한번 값이 정해 진 후에는 해당 주소의 값을 변경 하지 못하는 상수를 의미 한다. 
   즉 val num1 = 3 이라고 한 후 num1 = 4로 하였을 경우 에러가 발생한다.
-~~~~~
+  ~~~~~
   scala> val num1 = 3
    num1: Int = 3
 
@@ -19,7 +19,7 @@
    <console>:12: error: reassignment to val
        num1 = 4
             ^
- ~~~~~
+   ~~~~~
   
 
 # 함수
@@ -39,15 +39,18 @@
   return 형을 선언 한다는 의미가 있는 것 같다.
   인자를 받지 않는 경우는 
   ~~~~~
-  def printFunc() : String = "Scala is fun."
+  scala> def printFunc() : String = "Scala is fun"
+  printFunc: ()String
   ~~~~~
   또는 
   ~~~~~
-  def printFunc() = "Scala"
+  scala> val str = printFunc
+  str: String = Scala is fun
   ~~~~~
   와 같이 사용이 가능하며 인자가 없는 관계로 
   ~~~~~
-  val str = printFunc
+  scala> val str = printFunc
+  str: String = Scala is fun
   ~~~~~
   와 같이 괄호 없이 사용이 가능하다.
 
