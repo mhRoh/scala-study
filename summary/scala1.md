@@ -49,12 +49,7 @@
   scala> val str = printFunc
   str: String = Scala is fun
   ~~~~~
-  와 같이 사용이 가능하며 인자가 없는 관계로 
-  ~~~~~
-  scala> val str = printFunc
-  str: String = Scala is fun
-  ~~~~~
-  와 같이 괄호 없이 사용이 가능하다.
+  와 같이 사용이 가능하며 인자가 없어 위와 같이 괄호 없이 사용이 가능하다.
 
   Python 및 Java8에서 처럼 lamba 형식을 Scala는 제공한다.
   
