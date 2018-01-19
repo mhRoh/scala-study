@@ -25,13 +25,21 @@
   ~~~~~
   def func1(val: Int) : Double = val + 0.1
   ~~~~~
-  상기의 예시로 든 것이 기본적으로 사용되는 함수 선언 방법 같은데, 각 부분에 대한 내 생각을 정리해 보면 
-  **def**는 함수 선언 syntax, 
-  **func1** 은 함수 이름, 
-  **val : Int** 는 val 이라는 parameter 인자 변수를 정의하는데 Int 형으로 받을 꺼야 라는 선언 
-  **: Double** 부분은 이 함수의 return 값의 형은 Double이야,  
+  상기의 예시로 든 것이 기본적으로 사용되는 함수 선언 방법 같은데, 각 부분에 대한 내 생각을 정리해 보면
+  **def**는 함수 선언 syntax,
+  
+  
+  **func1** 은 함수 이름,
+  
+  
+  **val : Int** 는 val 이라는 parameter 인자 변수를 정의하는데 Int 형으로 받겠다 라는 선언,
+  
+  
+  **: Double** 부분은 이 함수의 return 값의 형은 Double이야,
+  
+  
   **= val + 0.1** 은 실제 함수부분이다.
-  이외에도 함수의 선언 방법에는 여러가지가 있는 듯 하다.
+  이외에도 함수의 선언 형식에는 여러가지가 있는 듯 하다.
   ~~~~~
   scala> def func2(val1: Double) = val1 + 0.1
   func2: (val1: Double)Double  
