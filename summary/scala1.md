@@ -25,32 +25,42 @@
   ~~~~~
   def func1(val: Int) : Double = val + 0.1
   ~~~~~
-  상기의 예시로 든 것이 기본적으로 사용되는 함수 선언 방법 같은데, 각 부분에 대한 내 생각을 정리해 보면
-  
-  
-  **def**는 함수 선언 syntax,
-  
-  
-  **func1** 은 함수 이름,
-  
-  
-  **val : Int** 는 val 이라는 parameter 인자 변수를 정의하는데 Int 형으로 받겠다 라는 선언,
-  
-  
-  **: Double** 부분은 이 함수의 return 값의 형은 Double이야,
-  
-  
-  **= val + 0.1** 은 실제 함수부분이다.
-  이외에도 함수의 선언 형식에는 여러가지가 있는 듯 하다.
+ 상기의 예시로 든 것이 기본적으로 사용되는 함수 선언 방법 같은데, 각 부분에 대한 내 생각을 정리해 보면
+   
+   **def**는 함수 선언 syntax,
+   
+   **func1** 은 함수 이름,
+   
+   **val : Int** 는 val 이라는 parameter 인자 변수를 정의하는데 Int 형으로 받겠다 라는 선언,
+   
+   **: Double** 부분은 이 함수의 return 값의 형은 Double이야,
+ 
+   **= val + 0.1** 은 실제 함수부분이다. 
+   
   ~~~~~
   scala> def func2(val1: Double) = val1 + 0.1
   func2: (val1: Double)Double  
   ~~~~~
-  위와 같이 return 타입을 명시하지 않고 Scala로 Complier로 하여금 추론을 하게 만들 수 있기도 하는데 위의 기본형이라고 
-  설명한 것 과 비교를 해 보면  실제 함수의 operation 선언 부분에 **: Double** 이 사라져 있는데 **:** 이 부분의 의미는 함수의
-  return 형을 선언 한다는 의미가 있는 것 같다.
-  인자를 받지 않는 경우는 
-  ~~~~~
+   
+  위와 같이 return 타입을 명시하지 않고 Scala로 Complier로 하여금 추론을 하게 만들 수 있기도 하는데 위의 기본형이라고 
+  설명한 것과 비교를 해 보면 함수의 반환 Type을 선언하는 **: Double** 이 사라져 있는데 이는 Scala 에서 반환형에 대한 추론을
+  제공하기에 가능한 부분이라 하겠다. (C/C++, Java 에서는 칼같이 선언 해야 하자나.)
+  함수의 parameter 의 인자의 Type을 명시하는 부분 및 반환값의 Type을 명시하는 부분에서 사용되는 **:** 이 녀석의 역활이 갑자기 떠올라서
+  이야기하는데, 이녀석은 혹시 좌측의 변수 또는 상수에 대한 Type을 지정하는데 사용되는 것이 아닐까? 그래서 한번 아래와 같이 해 보았다.
+  ~~~~~~~~
+  scala> var you : Int =9
+    you: Int = 9
+
+  scala> var you : Int = 10.0
+  <console>:11: error: type mismatch;
+    found   : Double(10.0)
+    required: Int
+       var you : Int = 10.0
+                       ^
+  ~~~~~~~~~
+  역시 그런 것 같은데 추후에 나오게 될 내용에서 다른 내용이 나오게 되면 다시 고쳐야지.
+  함수선언시 인자를 받지 않는 경우는 아래와 같은 방식으로 함수 선언을 .
+  ~~~~~
   scala> def printFunc() : String = "Scala is fun"
   printFunc: ()String
   ~~~~~
