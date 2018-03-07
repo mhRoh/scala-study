@@ -20,8 +20,19 @@
        num1 = 4
             ^
  ~~~~~
+
+ 아래의 형식으로 변수와 상수를 선언하여 사용하는 것이 정석이라고 한다.
+ ~~~~~~~~~
+ var <name> : <type> = <literal>
+ val <name> : <type> = <literal>
+ ~~~~~~~~~
+ 상기의 예시에서 보면 name, type, literal 이라는 부분이 나오는데
+ name 은 변수, 상수의 명, type은 변수, 상수가 가지게 될 형식을 의미(이 type의 경우
+ 모든 구현이 Class로 구현되어 있다), literal은 변수, 상수가 가지게 될 프로그램 내에서
+ 명시된 값을 의미한다.
+
 # 함수
-Scala에서의 함수는 python에서 처럼 **def** 를 이용하여 선언 할 수 있다.
+Scala에서의 함수는 Python에서 처럼 **def** 를 이용하여 선언 할 수 있다.
   ~~~~~
   def func1(val: Int) : Double = {
     val + 0.1
@@ -49,24 +60,10 @@ func2: (val1: Double)Double
 사라져 있는데 이는 Scala 에서 반환형에 대한 추론을 제공하기에 가능한 부분이라 하겠다.
 (함수의 반환형의 경우는 recursive하게 함수를 호출 할 경우에는 꼭 명시를
 해주어야 하는 것 같다.)
-함수의 parameter 의 인자의 Type을 명시하는 부분 및 반환값의 Type을 명시하는
-부분에서 사용되는 **:** 이 녀석의 역활이 갑자기 궁금해져 이야기하는데,
-이녀석은 혹시 좌측의 인자에 대한 Type을 지정하는데 사용되는 것이 아닐까?
-그래서 한번 아래와 같이 해 보았다.
-~~~~~~~~
-scala> var you : Int =9
-    you: Int = 9
-scala> var you : Int = 10.0
-<console>:11: error: type mismatch;
-    found   : Double(10.0)
-    required: Int
-       var you : Int = 10.0
-                       ^
-~~~~~~~~~
- 역시 그런 것 같은데 추후에 나오게 될 내용에서 다른 내용이 나오게 되면 다시 고쳐야지.
- 함수 선언시 인자를 받지 않는 경우는 아래와 같은 방식으로 함수 선언을 할 수 있다.
- 또한 아래의 예시에서는 함수의 구현부가 한 줄로 이루어져 있기에 embrace '{' 를
- 제거하고 선언을 할 수가 있다.
+
+함수 선언시 인자를 받지 않는 경우는 아래와 같은 방식으로 함수 선언을 할 수 있다.
+또한 아래의 예시에서는 함수의 구현부가 한 줄로 이루어져 있기에 embrace '{' 를
+제거하고 선언을 할 수가 있다.
 
 ~~~~~~~~~
 scala> def printFunc() : String = "Scala is fun"
@@ -89,18 +86,34 @@ func2: (val1: Double)Double
 return이 없구나.  그럼 이 Scala라는 놈은 함수가 값을 return 할 것인지
 아닌지를 어떻게 구분을 하지? 이것도 Scala complier 가 추론을 한다고 생각해야
 하나? 일단 아래의 예시를 한번 보자.
-greet: ()Unit 이라고 나오는 것을 보아 greet과 같이 return 값이 없을 경우는
-Unit 으로 표현을 하는 것 같다. 실제로 찾아보니 **Unit은 Java의 void와 같은
-역활**을 하는 것으로 나타났다.
 
 ~~~~~~~
 scala> def greet() = println("Hello. World!")
 greet: ()Unit
 ~~~~~~~
-명시적으로 return 이 없는 함수를 선언할 때 아래와 같이 선언을 할 수 있다.
+
+greet: ()Unit 이라고 나오는 것을 보아 greet과 같이 return 값이 없을 경우는
+Unit 으로 표현을 하는 것 같다. 실제로 찾아보니 **Unit은 Java의 void와 같은
+역활**을 하는 것으로 나타났다.
+
+즉 함수에서 변수 및 상수가 소비되는 형태의 함수의 경우라 하더라도 Unit을 명시적으로
+선언을 해주지 않으면 Scala가 이를 추론하여 알아서 해당 함수가 어떤 형식의 값을
+리턴하는지 알아서 complie 시에 결정을 해 준다. 아래의 경우를 보면 어떻게 보면
+
+~~~~~~~~~~
+scala> def userInputGreeting(welcome : String) = "I say " + welcome
+userInputGreeting: (welcome: String)String
+~~~~~~~~~~
+
+다른 언어에서는 "I say" + welcome 이라는 행위로 해당 함수는 그냥 변수를 소모한다고
+볼 수 있는데 Scala는 이를 굳이 추론을 하여 String을 반환하는 함수라고 인식을 한다.
+
+뭐 명시적으로 return 이 없는 함수를 선언을 아래와 같이 할 수 있으니 별 상관은 없다.
+(왠만하면 Return 값을 명시적으로 선언을 하도록 하자. 그것이 가독성에도 좋을 것이다.)
 ~~~~~~~
 scala> def greet2() : Unit = println("Hello, World2!")
 greet2: ()Unit
 ~~~~~~~
+
 
  
