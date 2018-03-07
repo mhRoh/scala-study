@@ -30,7 +30,7 @@ res19: Double = 72.5
 ~~~~~~~~~~~~~
 ## 3. Take the result from exercise 2, halve it, and convert it back to Centigrade.
 ~~~~~~~~
-scala> (res0 - 32) * 5/9
+scala> (res19 - 32) * 5/9
 res1: Double = 22.5
 ~~~~~~~~
 ## 4. The REPL can load and interpret Scala code from an external file with :load <file>
