@@ -19,7 +19,7 @@ Cold Case
 ~~~~~~~~~
 그런데 이게 이 문제의 답이 될 수 있나?
 ## 1-2. What Kinds of numbers, strings and other data does the REPL support?
-조사 필요.
+조사 필요.(I think everything you
 ## 2. Convert 22.5 Centigrade to Fahrenheit using formula cToF(x)=(x*9/5)+32.
 ~~~~~~~~~~~~~
 scala> def cToF(x:Double):Double = (x*9/5)+32
@@ -28,3 +28,9 @@ cToF: (x: Double)Double
 scala> cToF(22.5)
 res19: Double = 72.5
 ~~~~~~~~~~~~~
+## 3. Take the result from exercise 2, halve it, and convert it back to Centigrade.
+~~~~~~~~
+scala> (res0 - 32) * 5/9
+res1: Double = 22.5
+~~~~~~~~
+## 4. The REPL can load and interpret Scala code from an external file with :load <file>
