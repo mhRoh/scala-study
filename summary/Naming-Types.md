@@ -159,3 +159,10 @@ res2: String = I like Apple-Pie Apple-Pie Apple-Pie .
 ~~~~~~~
 
 문자열을 몇 번 끼워 넣을 것인 지를 지정하여 표시 할 수 있다.
+
+~~~~~~~
+scala> f"The Value of Pi = ${355/113.0}%.5f"
+res5: String = The Value of Pi = 3.14159
+~~~~~~~
+
+그런데 위의 예시를 보니 **s**는 문자열 치환을 의미하는 것 같다. f는 float 치환
