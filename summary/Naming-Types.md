@@ -90,8 +90,8 @@ Literal | Type | Description
 0x|Int|'0x'Hexadecimal
 5L or 5l|Long|'L' denote Long
 5.0|Double|Default Double
-5f|Float|'f' denote Float
-5d|Double|'d' denote Double
+5F or 5f|Float|'f' denote Float
+5D or 5d|Double|'d' denote Double
 
 ## Strings
 String에 대해 소개하는 것을 보면 일단 다른 언어 Java, Python 처럼 **"** 사이의
@@ -126,3 +126,26 @@ scala> val greeting2 =
     "
 ~~~~~~
 
+### String Interpolation
+문자열 끼워 넣기라는 뜻 인데. 이 기능은 정말 좋은 것 같다.
+~~~~~~~
+scala> val pi = 3.14159
+pi: Double = 3.14159
+
+scala> val intro_pi : String = s"What the value of ${pi}"
+intro_pi: String = What the value of 3.14159
+~~~~~~~
+
+위의 코드를 보면 **s** 와 **$** 그리고 **{}** 로 문자열 내에 이미 선언되어
+사용되고 있는 상수를 대입하여 사용하고 있다.
+자바라면 print 문 내에서
+~~~~~~~
+double pi = 3.14159;
+System.out.println("What the value of " + pi);
+~~~~~~~
+와 같이 처리를 해주어야 할 것인데 위의 예제에서 만약 문자열에 끼워 넣어야 할 상수
+, 변수등의 값이 많아 질 경우 이르 처리하는 코드를 작성 할 때 약간 귀찮은 일이
+많이 발생을 하는데 단순히 scala에서는 **s,$,{}**로 끼워 넣기가 구현되니 말이다.
+
+**{}** 의 경우는 꼭 사용할 필요는 없으나 명시적으로 문자열 내에서 치환될 부분을
+선언해 줄 때 사용하게 된다.
