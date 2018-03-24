@@ -149,3 +149,13 @@ System.out.println("What the value of " + pi);
 
 **{}** 의 경우는 꼭 사용할 필요는 없으나 명시적으로 문자열 내에서 치환될 부분을
 선언해 줄 때 사용하게 된다.
+그런데 이 String Interpolation 에서 Python의 향기가 느껴졌다. 바로 아래를 보면
+~~~~~~~
+scala> val item = "Apple-Pie "
+item: String = "Apple-Pie "
+
+scala> s"I like ${item * 3}."
+res2: String = I like Apple-Pie Apple-Pie Apple-Pie .
+~~~~~~~
+
+문자열을 몇 번 끼워 넣을 것인 지를 지정하여 표시 할 수 있다.
