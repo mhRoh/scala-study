@@ -127,7 +127,8 @@ scala> val greeting2 =
 ~~~~~~
 
 ### String Interpolation
-문자열 끼워 넣기라는 뜻 인데. 이 기능은 정말 좋은 것 같다.
+문자열 끼워 넣기라는 뜻 인데. 이 기능은 정말 좋은 것 같다.(그런데 끼워 넣기보다는
+교체가 맞는 것 같다.)
 ~~~~~~~
 scala> val pi = 3.14159
 pi: Double = 3.14159
@@ -137,7 +138,7 @@ intro_pi: String = What the value of 3.14159
 ~~~~~~~
 
 위의 코드를 보면 **s** 와 **$** 그리고 **{}** 로 문자열 내에 이미 선언되어
-사용되고 있는 상수를 대입하여 사용하고 있다.
+있는 상수를 대입하여 사용하고 있다.
 자바라면 print 문 내에서
 ~~~~~~~
 double pi = 3.14159;
@@ -150,6 +151,7 @@ System.out.println("What the value of " + pi);
 **{}** 의 경우는 꼭 사용할 필요는 없으나 명시적으로 문자열 내에서 치환될 부분을
 선언해 줄 때 사용하게 된다.
 그런데 이 String Interpolation 에서 Python의 향기가 느껴졌다. 바로 아래를 보면
+문자열을 몇 번 끼워 넣을 것인 지를 지정하여 표시 할 수 있다.
 ~~~~~~~
 scala> val item = "Apple-Pie "
 item: String = "Apple-Pie "
@@ -158,11 +160,56 @@ scala> s"I like ${item * 3}."
 res2: String = I like Apple-Pie Apple-Pie Apple-Pie .
 ~~~~~~~
 
-문자열을 몇 번 끼워 넣을 것인 지를 지정하여 표시 할 수 있다.
-
+**f"..."** 아래의 예시에서 **f**는 위의 **s**를 사용하는 것 처럼 미 사용된 변수,상수
+값을 문자열 내에 가져다 사용할 수 있게 하는데 보다시피 해당 변수 등이 가지고 있는
+값의 일부만 출력을 한다든지 하는 값을 변형 시킬 수 있게된다.
 ~~~~~~~
+scala>val item = "apple"
+res4: String = apple
+scala> f"I wrote a new $item%.3s today"
+res5: String = I wrote a new app today
+
 scala> f"The Value of Pi = ${355/113.0}%.5f"
 res5: String = The Value of Pi = 3.14159
 ~~~~~~~
 
-그런데 위의 예시를 보니 **s**는 문자열 치환을 의미하는 것 같다. f는 float 치환
+문자열 내에 미리 선언된 변수를 가져와 특정 형식으로 치환을 할 때 **s"**
+와 같은 형식을 사용하면 아래의 예시처럼 원하는 결과를 얻을 수가 없다.
+~~~~~~
+scala> item
+res4: String = apple
+scala> s"I like $item%.3f"
+res6: String = I like apple%.3f
+~~~~~~
+
+## Regular Expression
+
+~~~~~~
+scala> val input = f"Enjoying this apple ${355/113.0}%.5f times today"
+input: String = Enjoying this apple 3.14159 times today
+
+scala> val pattern = """.* apple ([\d.]+) times .*""".r
+pattern: scala.util.matching.Regex = .* apple ([\d.]+) times .*
+
+scala> val pattern(amountText) = input
+amountText: String = 3.14159
+
+scala> val amount = amountText.toDouble
+amount: Double = 3.14159
+~~~~~~
+
+Scala 에서 **"""** 를 통해 escaping backslash 없이 문자열 내에서 특수 문자를
+사용할 수 있다는 말을 들었을 때 가장 먼저 든 생각은 Python의 reqular expression
+이었다. Python의 reqular expression에서는, 내 기억이 맞는 다면 re"..." 와 같은
+형식으로 Reqular Expression pattern 을 선언 하며 해당 pattern의 문자열 내에서는
+escaping backslash를 사용하지 않아도 된다.
+
+Escaping BackSlash 란? Java에서 문자열 내에 특수문자를 넣고 이를 출력 하고 싶을 떄
+, 가령 linefeed를 넣을 떄 **\n** 와 같이 넣는데 이렇게 하면 화면에서는 줄바꿈이 일어
+나고 **\n**은 출력이 되지 않는다. 이 때 **\\n** 와 같이 표현을 해 주면 해당 특수문자
+는 일반 문자처럼 인식이 되어 화면에 출력되게 된다.
+
+**"""** 내에서 escaping backslash를 특수문자에서 사용하지 않아도 된다면 Reqular
+Expression을 사용하기가 매우 편리해 진다.
+
+위의 예시에서는 문자열 내에서 Double 형의 숫자를 찾아 추출하는 예시를 보여 준다.
