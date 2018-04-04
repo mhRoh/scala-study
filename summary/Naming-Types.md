@@ -93,7 +93,7 @@ Literal | Type | Description
 5F or 5f|Float|'f' denote Float
 5D or 5d|Double|'d' denote Double
 
-## Strings
+# Strings
 String에 대해 소개하는 것을 보면 일단 다른 언어 Java, Python 처럼 **"** 사이의
 값은 String으로 인식하게 된다. **\(backslahs)**를 통해 특수 문자를 사용할 수도 있다.
 ~~~~~~~~~
@@ -126,7 +126,7 @@ scala> val greeting2 =
     "
 ~~~~~~
 
-### String Interpolation
+## String Interpolation
 문자열 끼워 넣기라는 뜻 인데. 이 기능은 정말 좋은 것 같다.(그런데 끼워 넣기보다는
 교체가 맞는 것 같다.)
 ~~~~~~~
@@ -182,7 +182,7 @@ scala> s"I like $item%.3f"
 res6: String = I like apple%.3f
 ~~~~~~
 
-## Regular Expression
+# Regular Expression
 
 ~~~~~~
 scala> val input = f"Enjoying this apple ${355/113.0}%.5f times today"
@@ -213,3 +213,135 @@ Escaping BackSlash 란? Java에서 문자열 내에 특수문자를 넣고 이�
 Expression을 사용하기가 매우 편리해 진다.
 
 위의 예시에서는 문자열 내에서 Double 형의 숫자를 찾아 추출하는 예시를 보여 준다.
+
+# Core Nonnumeric Types
+[Core Types hierarchy](https://www.safaribooksonline.com/library/view/learning-scala/9781449368814/images/lnsc_0201.png.jpg)
+
+Name | Description | Instantiable
+:-------:|:---------|:---------:
+Any | The root of all types in scala | No
+Anyval | The root of all value types | No
+AnyRef | The root of all reference(nonvalue) types | No
+Nothing | The subclass of all types | No
+Null | The subclass of all AnyRef types signifying a null value | No
+Char | Unicode Character | Yes
+Boolean | true or false | Yes
+String | A string of characters(i.e., text) | Yes
+Unit | Denotes the lack of a value | No
+
+## Any
+Any Type은 모든 Type의 부모 Type 이며, AnyVal, AnyRef을 자식 Type으로 가지고 있다.
+## AnyVal
+AnyVal 을 확장하여 사용되는 Type 들은 모든 data의 근간을 이루는 value type이다.
+즉, Int,Byte,Long 과 같은 Numeric Type 부터 Char, Boolean, Unit들이 이들이다.
+AnyVal을 확장하여 사용하는 Type 들은 heap 에서는 Object로 그리고 stack memory 상에서는
+primitive(JVM) 으로 존재하게 된다.
+## AnyRef
+AnyRef 을 root type으로 사용하는 모든 type들은 heap memory 상에 object로 존재하게
+된다. **Ref** 에서 유추할 수 있듯이 AnyRef를 root type로 가지는 type 들은
+Reference Type들을 의미하며 이는 Memory reference로 각 type의 값에 접근을 하게 된다.
+## Nothing
+Nothing 은 다른 모든 type의 하위 타입이며, 이는 호환성을 위해 존재해야하는 중용한
+ type 이라고 한다. 예를 들어 함수가 return 값을 생성하는 도중에(?)
+return을 하게 될 때, 이 return 값이 가지게 되는 type이 된다. (정확하게 어떤 경우인지
+모르겠으나.. 아마 lazy function이나 비동기 처리로 인해 함수가 바로 return을 하게 될 때
+return value가 가지는 type을 말하는 것 같다.)
+## Null
+Null 은 AnyRef을 부모 type으로 가지는 모든 type의 하위 type이며, 이는 null을 표현하기
+위해 존재한다.
+## Char
+Char는 C, Java등 에서와 같이 String(문자열)을 이루는 최소 type이며, Numeric Data Types
+에서 발견되는 type이다. 이게 무슨 말이냐 하면 ASCII 이야기이다. Char의 경우는 1byte를
+의미하며, 1byte는 하나의 문자를 의미하는데 이 하나의 문자는 ASCII 상에서는 10진수 중 하나를
+의미한다는 것이다. 아래의 예를 보자
+~~~~~~~~
+scala> val c= 'A'
+c: Char = A
+scala> val i: Int = c
+i: Int = 65
+scala> val t: Char = 116
+t: Char = t
+~~~~~~~~
+Char type은 숫자 type인 Int c로 convert가 가능하며, convert 되었을 때 ASCII 상의 값으로 표현이 된다는
+것이다.
+## Boolean
+true, false 를 표현하기 위해 존재하는 type. 여기서 한가지 알아 두어야 할 것은 Boolean과 연관된 사항 중
+다른 언어와 차이점이 발견된다. C 의 경우는 0 은 if 와 사용되게 되면 false를 의미하고, 1은 true를 의미한다.
+그런데 Scala는 이를 지원하지 않는다.
+~~~~~~~~
+int zero = 0;
+if (!zero) {
+   print(zero is false);
+   zero = 1;
+}
+
+if (zero) {
+  print(zero is true)
+}
+~~~~~~~~
+
+바로 위와 같이 1,0,null, 변수에 value가 존재/비존재 시에 이를 true, false로 사용하지 못한다는
+것이다.
+## Unit
+Unit은 function에서 보았던 것 처럼, return 값이 없음을 나타내는 type이다. 마치 C, Java에서의 **void**와 같다.
+아래의 예시처럼 상수 또는 변수가 Unit type을 가지게 할 수는 있으나, 아래와 같은 방식은 보편적으로 사용되지 않는다.
+~~~~~~~
+scala> var nothing = ()
+nothing: Unit = ()
+
+scala> val nothing1 = ()
+nothing1: Unit = ()
+~~~~~~~
+## Type Operations
+아래의 각 함수들은 각 type들이 모두 가지고 있는 함수들이며 해당 부분에 대해 하나씩 살펴 보자.
+- asInstanceOf[<type>] : type을 다른 type으로 변경을 하는 함수이다. 그런데 Numeric value를
+가지는 변수가 Boolean으로 변경이 될 수 없는 것 처럼 제약사항이 많으니 이 함수를 사용하는 것은 자제 해야겠다.
+~~~~~
+scala> val zero = 0
+zero: Int = 0
+
+scala> zero.asInstanceOf[Boolean]
+java.lang.ClassCastException: java.base/java.lang.Integer cannot be cast to java.base/java.lang.Boolean
+  at scala.runtime.BoxesRunTime.unboxToBoolean(BoxesRunTime.java:85)
+  ... 24 elided
+
+scala> zero.asInstanceOf[Long]
+res4: Long = 0
+~~~~~
+- getClass : 변수/상수의 type을 가져오는 함수이다.
+~~~~~
+scala>
+zero.getClass
+res5: Class[Int] = int
+~~~~~
+- isInstanceOf : 변수/상수의 type이 명시한 type에 속하는지 질의하는 함수
+~~~~~
+scala> zero.isInstanceOf[Int]
+res6: Boolean = true
+~~~~~
+- hashCode : 변수/상수의 hashCode를 가져오는 함수
+~~~~
+scala> zero.hashCode()
+res7: Int = 0
+scala> "A".hashCode
+res8: Int = 65
+~~~~
+-  to<type> : asInstanceOf와 같은 목적을 가지는 함수. 각 type에는 변환가능한 type에
+대한 함수만을 제공하므로 asInstanceOf와 같은 호환성에러가 나오지 않는다. 예를 들어
+Int에서는 **toBoolean** 과 같은 함수는 제공되지 않는다.
+~~~~
+scala> zero.toOctalString
+res9: String = 0
+scala> zero.toByte
+res10: Byte = 0
+~~~~
+- toString : 변수/상수의 값을 String으로 변환하는 함수
+~~~~
+scala> zero.toString
+res12: String = 0
+~~~~
+## Tuples
+Scala에서의 tuple은 서로 다른 type의 값들을 보관 할 수 있는 보관소(Container)역활을 한다.
+Arrays 또는 List의 경우와 같이 iteration 동작을 통한 각 값에 대한 접근을 허용하지 않는다.
+
+
