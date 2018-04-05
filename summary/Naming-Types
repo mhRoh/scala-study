@@ -343,5 +343,34 @@ res12: String = 0
 ## Tuples
 Scala에서의 tuple은 서로 다른 type의 값들을 보관 할 수 있는 보관소(Container)역활을 한다.
 Arrays 또는 List의 경우와 같이 iteration 동작을 통한 각 값에 대한 접근을 허용하지 않는다.
+Tuple 생성시에는 아래와 같은 방식으로 **()** 안에 **,** 로 구분한 값을 넣어서 선언을 한다.
+~~~~~
+scala> (10, 11, 3.134, "scala-newbie")
+res0: (Int, Int, Double, String) = (10,11,3.134,scala-newbie)
+scala> var info = (10,11,3.134,"scala-newbie")
+info: (Int, Int, Double, String) = (10,11,3.134,scala-newbie)
+~~~~~
+
+만약 Tuple 내의 값에 접근하고 싶다면 **._<index>** 와 같은 형식으로 값에 접근 가능하다.
+~~~~
+scala> info._1
+res1: Int = 10
+scala> info._4
+res2: String = scala-newbie
+~~~~
+
+또한 2개의 항목으로 구성된 Tuple을 만들고 싶다면 아래와 같은 형식으로도 가능하다.
+~~~~
+scala> var tuple2 = "read" -> "or"
+tuple2: (String, String) = (read,or)
+~~~~
+
+기존에 만들어진 tuple을 포함하는 새로운 tuple을 만드는 것도 아래와 같이 가능하다.
+~~~~
+scala> tuple2.->("die")
+res7: ((String, String), String) = ((read,or),die)
+scala> info.->("new tuple", 9, 33)
+res6: ((Int, Int, Double, String), (String, Int, Int)) = ((10,11,3.134,scala-newbie),(new tuple,9,33))
+~~~~
 
 
