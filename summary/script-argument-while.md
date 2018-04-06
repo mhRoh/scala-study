@@ -34,4 +34,3 @@ user 입력이 넘어오는 것을 확인 할 수 있었다.
 또 Java와 비교를 하였을 때 Scala의 경우는 main 진입점이 존재하지 않는 것이 차이점
 이다. 이는 같은 Script 모드로 실행이 가능한 Python 과도 다른 점이다.
 (Python은 if __name__ == "main":  으로 첫번째 진입점을 명시하게 된다.)
-## Arguments - Length
