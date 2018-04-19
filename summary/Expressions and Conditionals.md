@@ -36,10 +36,10 @@ Scala 에서 조건문 block의 사용은 C, Java 에서 와 같이 If..else if.
 로 사용이 가능하다. 그런데 책의 설명에서는 Scala에서는 if ... else 에 대해서만
 인식을 하고 else if 는 다르게 해석을 한다고 한다.
 ~~~~~~~
-if .. else if .. else  == if { if..else} else
+if ... else if ... else  == if ... else { if ... else ...}
 ~~~~~~~
 
-Scala 의 if .. else 의 사용법은 아래와 같다.
+Scala 의 if의 사용법은 아래와 같다.
 ~~~~~~~
 if (<Booblean expression>) <expression>
 
@@ -52,3 +52,55 @@ condition: Any = ()
 위와 같이 사용이 가능하며 if 에서 사용되는 boolean expression 이 false를 가르키는데
 else 구문이 없을 경우에 Any type에 해당되는 값이 return 된다.
 
+if ... else Expression 은 아래와 같이 사용된다. Java 및 C의 것과 거의 비슷하나
+위에서 설명하였던 것과 같이 if block 내의 모든 표현은 expression 으로 값을 return
+한다.
+~~~~~
+if (<Booblean expression>) <expression>
+else <exprssion>
+
+val x = 10; val y = 20
+x: Int = 10
+y: Int = 20
+
+scala> val max = if (x > y) x else y
+max: Int = 20
+~~~~~
+
+# Match Expression
+Match Expression 은 C, Java의 switch와 비슷하다.
+C, Java에서 제공하는 switch 와 다른 점은 **wild card "catch-all"** 패턴을
+지원하고, **break** 를 제공하지 않는다는 것이다.
+Match Expression의 사용법은 아래와 같다.
+~~~~~~
+<expression> match {
+  case <pattern match> => <expression>
+  [case ...]
+}
+
+scala>
+val max = (x > y) match {
+  case true => x
+  case false => y
+}
+max: Int = 20
+~~~~~~
+
+아래의 예시에서는 match block 내에서 여러 statement 와 같이 사용할 경우 curly
+brace를 사용하여 이를 표현함을 보여주며 curly brace 내의 맨 마지막 표현은 값을
+return 하는 expression이 되어야 한다.
+~~~~~~
+scala> val message : String = status match {
+  case 200 => "ok"
+  case 400 => {
+    println("4xx Not found")
+    "4xx error"
+  }
+  case 500 => {
+    println("5xx Server error")
+    "5xx Server error"
+  }
+}
+5xx Server error
+message: String = 5xx Server error
+~~~~~~
