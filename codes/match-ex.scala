@@ -60,3 +60,4 @@ val kind = day match {
 }
 print("Day is " + kind)
 
+
