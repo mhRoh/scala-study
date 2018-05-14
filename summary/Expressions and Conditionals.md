@@ -106,3 +106,4 @@ scala> val message : String = status match {
 5xx Server error
 message: String = 5xx Server error
 ~~~~~~
+## Match WIld-card
