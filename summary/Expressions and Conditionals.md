@@ -90,6 +90,8 @@ max: Int = 20
 brace를 사용하여 이를 표현함을 보여주며 curly brace 내의 맨 마지막 표현은 값을
 return 하는 expression이 되어야 한다.
 ~~~~~~
+scala> var status : Int = 500
+status: Int = 500
 scala> val message : String = status match {
   case 200 => "ok"
   case 400 => {
