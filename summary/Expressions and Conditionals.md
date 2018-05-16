@@ -106,4 +106,86 @@ scala> val message : String = status match {
 5xx Server error
 message: String = 5xx Server error
 ~~~~~~
-## Match WIld-card
+
+## Wild-Card matching (other)
+아래는 wild card expression을 사용하는 첫 예제이다. Scala에서 제공하는
+match wild card 는 두가지가 있는데, 일단 첫번째로 아래와 같이 **other**가 있다.
+~~~~
+val message = "not found"
+
+val status = message match {
+  case "ok" => 200
+  case other => {
+    println(s"Couldn't parse $other")
+    -1
+  }
+}
+
+println ("Response status : " + status)
+
+Couldn't parse not found
+Response status : -1
+~~~~
+
+상기의 예제를 보면 첫번째 case는 match 를 실행할 값이 명시가 되어 있는데 반해
+**other**의 경우는 match를 수행할 값이 없음을 알 수 있다. 이 other에 들어가는
+값은 message의 값을 그대로 가지게 된다. 그래서 other block안의 print 문에서
+other에 들어가 있는 값을 출력할 수 있게 된다.
+
+## Wild-Card matching (_)
+두번쨰 wild card는 **_** 이다. **_** wild card 의 경우는 Runtime시에 발생
+하는 임의의 값에 대한 이름없는 변수가 되어 wild card match를 수행 역활을 할 수
+있는 것이다. 다만 첫번째 **other**와는 다르게 **_**에 할당된 값에 접근을 할 수
+가 없다. 아래의 예제를 보자
+~~~~~
+val status1 = message match {
+  case "ok" => 200
+  case _ => {
+    println(s"Couldn't parse $_")
+    -1
+  }
+}
+println (s"Response $status1 ")
+
+ error: error in interpolated string: identifier or block expected
+    println(s"Couldn't parse $_")
+                            ^
+ error: ')' expected but '}' found.
+  }
+  ^
+~~~~~
+**_** block 안에서 **_**를 변수처럼 생각하여 해당 변수에 할당된 값을 출력해
+보려 하면 위와 같은 에러가 발생을 하게된다.
+
+여기까지 와서 일단 Scala에서 제공을 하는 match ~~~ case 를 생각해 보면 이는 if .. else
+의 확장이라고 보아도 좋을 듯하다. 이유는 break를 제공하지 않아 모든 case문을 하나
+씩 수행하여 봐야 될 것이다. 만약에 match가 되는 block을 만나게 되면 이 match block
+을 벗어나기 위한 수단이 필요할 터인데 다른 언어에서는 이를 **break**로 수행을 하였
+는데 Scala에서는 특정 값을 return 하는 것으로 이를 수행하기 때문이고, 이는 if, else
+와 같기 때문이다. if , else 의 경우는 block 안에 선언이 되어 있는 expression이
+특정 값을 return하지 않더라도 무조건 Unit()을 리턴하게 되어 있으니 말이다.
+
+위의 match wild-card 예제에서 **_** block 안에서 **-1** 을 제거하면 어떤 일이
+벌어질까 한번 생각해 보자 아마도 println 문은 Unit 을 출력하게 될 것이다.
+~~~~~
+val status2 = message match {
+  case "ok" => 200
+  case _ => {
+    println(s"Couldn't parse $message")
+  }
+}
+
+println (s"Response $status2 ")
+
+Couldn't parse not found
+Response ()
+~~~~~
+
+실제 수행 결과 Unit을 나타내는 **()**이 출력 되었다. 이렇게 되는 이유는 특정값을
+return하지 않는 expression의 경우는 Unit()을 return하게 되어 있기 때문이다.
+## Matching with Pattern Guards
+
+
+
+
+

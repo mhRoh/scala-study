@@ -34,7 +34,7 @@
 # 함수
 Scala에서의 함수는 Python에서 처럼 **def** 를 이용하여 선언 할 수 있다.
   ~~~~~
-  def func1(val: Int) : Double = {
+  def func1(val1: Int) : Double = {
     val + 0.1
   }
   ~~~~~
@@ -44,7 +44,7 @@ Scala에서의 함수는 Python에서 처럼 **def** 를 이용하여 선언 할
 
 **func1** 은 함수 이름,
 
-**val : Int** 는 val 이라는 parameter 인자 변수를 정의하는데 Int 형으로 받겠다 라는 선언,
+**val1 : Int** 는 val 이라는 parameter 인자 변수를 정의하는데 Int 형으로 받겠다 라는 선언,
 
 **: Double** 부분은 이 함수의 return 값의 형은 Double이야,
 
