@@ -184,8 +184,20 @@ Response ()
 실제 수행 결과 Unit을 나타내는 **()**이 출력 되었다. 이렇게 되는 이유는 특정값을
 return하지 않는 expression의 경우는 Unit()을 return하게 되어 있기 때문이다.
 ## Matching with Pattern Guards
+[More Info](https://alvinalexander.com/scala/how-to-use-if-then-expressions-guards-in-case-statements-scala)
+**Pattern Guards** 이것을 어떻게 이해 하여야 하나? 패턴 보호자? 그냥 이렇게
+생각하자. match에 if 문을 사용할 수 있게 하여 좀 더 세밀한 조건 분기를 수행
+할 수 있게 한다고.
+match with if를 사용하는 방법 예시는 아래와 같다.
 
+~~~~
+val  response: String = null
 
+response match {
+  case s if s != null => println(s"Received '$s'")
+  case s => println("Error! Received a null response")
+}
+~~~~
 
 
 

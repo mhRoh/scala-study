@@ -60,4 +60,14 @@ val kind = day match {
 }
 print("Day is " + kind)
 
+val dayAny : Any = 0
+val kind2 : Any = dayAny match {
+   case "MON" | "TUE" | "WEB" | "THU" | "FRI" => "weekday"
+   case 1 | 2 | 3 | 4 | 5  => "weekday"
+   case "SAT" | "SUN" => "weekend"
+   case 0 | 6 => "weekend"
+}
+
+print(s"DayAny is $kind2")
+
 
