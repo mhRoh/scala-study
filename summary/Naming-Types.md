@@ -94,7 +94,7 @@ Literal | Type | Description
 5D or 5d|Double|'d' denote Double
 
 # Strings
-String에 대해 소개하는 것을 보면 일단 다른 언어 Java, Python 처럼 **"** 사이의
+String에 대해 소개하는 것을 보면 일단 다른 언어 Java, Python 처럼 **""** 사이의
 값은 String으로 인식하게 된다. **\(backslahs)**를 통해 특수 문자를 사용할 수도 있다.
 ~~~~~~~~~
 scala> val hello = "Hello There"
@@ -106,7 +106,7 @@ I gave you,
 hearty greeting.
 ~~~~~~~~~
 
-그런데 Java와는 다르게 **'=='** 을 통해, Python 에서와 같이, Sting 비교를 할 수가 있다.
+그런데 Java와는 다르게 **'=='** 을 통해, Python 에서와 같이, String 비교를 할 수가 있다.
 ~~~~~~~~
 scala> hello == greeting
 res6: Boolean = false

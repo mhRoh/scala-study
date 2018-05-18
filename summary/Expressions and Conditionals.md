@@ -133,7 +133,7 @@ Response status : -1
 other에 들어가 있는 값을 출력할 수 있게 된다.
 
 ## Wild-Card matching (_)
-두번쨰 wild card는 **_** 이다. **_** wild card 의 경우는 Runtime시에 발생
+두번째 wild card는 **_** 이다. **_** wild card 의 경우는 Runtime시에 발생
 하는 임의의 값에 대한 이름없는 변수가 되어 wild card match를 수행 역활을 할 수
 있는 것이다. 다만 첫번째 **other**와는 다르게 **_**에 할당된 값에 접근을 할 수
 가 없다. 아래의 예제를 보자
@@ -185,6 +185,7 @@ Response ()
 return하지 않는 expression의 경우는 Unit()을 return하게 되어 있기 때문이다.
 ## Matching with Pattern Guards
 [More Info](https://alvinalexander.com/scala/how-to-use-if-then-expressions-guards-in-case-statements-scala)
+
 **Pattern Guards** 이것을 어떻게 이해 하여야 하나? 패턴 보호자? 그냥 이렇게
 생각하자. match에 if 문을 사용할 수 있게 하여 좀 더 세밀한 조건 분기를 수행
 할 수 있게 한다고.
@@ -199,5 +200,21 @@ response match {
 }
 ~~~~
 
+## Matching Types with Pattern Variables
 
+가끔 변수나 상수의 값의 Type을 통해 서로 다른 동작을 수행하게 하고 픈 경우가
+생긴다. 이런 경우를 대비하여 Scala에서는 Matching 시에 값의 Type Matching을
+지원한다. Java의 instanceof 와 같다고 보면 된다.
+
+~~~~~
+val value : Any = 12180
+val realType = value match {
+   case x : String => s"'x'"
+   case x : Double => f"$x%%.2f"
+   case x : Float => f"$x%%2.f"
+   case x : Long => s"${x}l"
+   case x : Int => s"${x}i"
+};
+println(s"Type of value $realType")
+~~~~~
 

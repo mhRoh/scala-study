@@ -68,6 +68,17 @@ val kind2 : Any = dayAny match {
    case 0 | 6 => "weekend"
 }
 
-print(s"DayAny is $kind2")
+println(s"DayAny is $kind2")
+
+val value : Any = 12180
 
 
+val realType = value match {
+   case x : String => s"'x'"
+   case x : Double => f"$x%%.2f"
+   case x : Float => f"$x%%2.f"
+   case x : Long => s"${x}l"
+   case x : Int => s"${x}i"
+};
+
+println(s"Type of value $realType")
