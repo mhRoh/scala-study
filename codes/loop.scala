@@ -24,8 +24,8 @@ val result = for (x <- 1 to 9; y <- 1 to 9) yield {
 print(result)
 for (multipleLine <- result) println(multipleLine)
 
-println("Using Iterator-To by Decrement")
-for (x <- 10 to 1 by -1) {
+println("Using Iterator-To by Increment")
+for (x <- 1 to 10 by 2) {
   print(s"$x,")
 }
 
@@ -33,6 +33,13 @@ println("\nUsing Iterator-Until by Decrement")
 for (x <- 10 until 1 by -1) {
   print(s"$x,")
 }
+println("\n")
 
+val threes = for (i <- 1 to 20 if i % 3 == 0) yield i
+println(threes)
 
+val quote = "Faith,Hope,,Charity,Generosity"
+for { t <- quote.split(",") if t != null if t.size > 0 } {
+  println(t)
+}
 
