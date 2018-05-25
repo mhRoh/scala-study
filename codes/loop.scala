@@ -35,6 +35,7 @@ for (x <- 10 until 1 by -1) {
 }
 println("\n")
 
+println("Iterator guards")
 val threes = for (i <- 1 to 20 if i % 3 == 0) yield i
 println(threes)
 
@@ -43,3 +44,34 @@ for { t <- quote.split(",") if t != null if t.size > 0 } {
   println(t)
 }
 
+println("Nested Iterators")
+
+for { x <- 1 to 2
+      y <- 1 to 3 } {
+  print(s"($x,$y)")
+}
+println("\n")
+
+val vectors = for { x <- 1 to 2
+      y <- 1 to 3 } yield s"($x, $y)"
+println(vectors)
+
+
+println("\nValue Binding Inside of For Loop")
+val adding = for (i <- 0 to 8; y = i + 1) yield y
+println(adding)
+
+
+var multiple = for (y <- 1 to 10; x <- 2 to 11) yield s"$y * $x"
+println(s"Multiple $multiple")
+
+println("\nWhile Loop Ex")
+var x=10
+while (x > 0) x -= 1
+println (s"Current X = $x" )
+
+println("Do While ex")
+val doWh  = 0
+do {
+ println(s"DoWhile $doWh")
+} while (doWh > 0)

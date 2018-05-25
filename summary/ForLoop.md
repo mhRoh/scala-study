@@ -63,9 +63,6 @@ for (x <- 1 until 10; y <- 1 until 10) {
 ~~~~~~
 상기의 예제의 결과는 이전의 예제와 동일한 결과를 보인다.
 
-**그런데 iterator 내에 변수는 꼭 하나만 사용할 수 있는 것일까?**
-
-
 Scala 에서의 for loop는 다른 언어에 제공하지 않는 한가지 특성이 있다.
 ~~~~~~ 
 println("Yield keywords in For Loop")
@@ -139,6 +136,37 @@ Hope
 Charity
 Generosity
 ~~~~~
+
+# Nested Iterators
+for loop 중첩을 이야기하는 것이다. 위에서 이야기한 **for (loop-expression; loop-expression)** 과 같은 효과를 보인다.
+즉 첫번째 loop-expression 이 바깥측의 loop가 되는 것이고, 그 다음 줄의 loop는 이 바깥측의 loop 안에서 동작하는 loop 가 되어 
+동작하게 된어, 안쪽의 loop는 바깥측의 loop가 지정하는 숫자 만큼 더 돌게 된다. 이에 따라 아래의 예제의 경우 전체 loop는 총 6번 동작하게
+된다.
+~~~~~
+for { x <- 1 to 2
+      y <- 1 to 3 } {
+  print(s"($x,$y)")
+}
+(1,1)(1,2)(1,3)(2,1)(2,2)(2,3)
+~~~~~
+# Value Binding Inside of For Loop
+**for (<identifier> <- <iterator>; <identifier> = <expression>)**
+~~~~~~
+println("\nValue Binding Inside of For Loop")
+val adding = for (i <- 0 to 8; y = i + 1) yield y
+println(adding)
+
+Value Binding Inside of For Loop
+Vector(1, 2, 3, 4, 5, 6, 7, 8, 9)
+~~~~~~
+
+## 여기서 잠깐!!
+갑자기 생각난 문제 For Loop 내에서 사용되는 **<-** 이 녀석 뭐지? 갑자기 등장을 해서 그냥 그런가 보다 하고 넘어가고 있었는데.
+for loop 외에서도 사용이 가능한가? 
+
+
+
+
 
 
  
